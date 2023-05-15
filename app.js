@@ -6,8 +6,13 @@ console.clear();
 const main = async () => {
   console.log("Hello World");
 
-  showMenu();
-//   pause();
+  let opt = "";
+
+  do {
+    opt = await showMenu();
+    if (opt !== "0") await pause();
+  } while (opt !== "0");
+  //   ;
 };
 
 main();
