@@ -50,11 +50,11 @@ const inquirerMenu = async () => {
 };
 
 const pause = async () => {
-
-  console.log('\n')
+  console.log("\n");
   await inquirer.prompt([
     {
       type: "input",
+      name: "input",
       message: `\nPress ${"ENTER".green} to continuen\n`,
     },
   ]);
