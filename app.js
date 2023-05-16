@@ -1,4 +1,9 @@
-const { inquirerMenu, pause, readInput } = require("./helpers/inquirer");
+const {
+  inquirerMenu,
+  pause,
+  readInput,
+  listTasksDelete,
+} = require("./helpers/inquirer");
 const { saveDB, readDB } = require("./helpers/saveFile");
 const Tasks = require("./models/tasks");
 // const { showMenu, pause } = require("./helpers/messages");
@@ -24,7 +29,17 @@ const main = async () => {
         tasks.createTask(desc);
         break;
       case "2":
-        console.log(tasks.listArr);
+        tasks.completedList();
+        break;
+      case "3":
+        tasks.listPendingCompleted(true);
+        break;
+      case "4":
+        tasks.listPendingCompleted(false);
+        break;
+      case "6":
+        const id = await listTasksDelete(task.listArr);
+        tasks.deleteTask(id);
         break;
     }
 

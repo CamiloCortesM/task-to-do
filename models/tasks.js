@@ -19,6 +19,12 @@ class Tasks {
     this._list = {};
   }
 
+  deleteTask(id = "") {
+    if (this._list[id]) {
+      delete this._list[id];
+    }
+  }
+  
   loadTaskFromArray(tasks = []) {
     tasks.map((task) => (this._list[task.id] = task));
   }
@@ -26,6 +32,32 @@ class Tasks {
   createTask(desc = "") {
     const task = new Task(desc);
     this._list[task.id] = task;
+  }
+
+  completedList() {
+    console.log();
+    this.listArr.forEach((task, index) => {
+      const idx = `${index + 1}`.green;
+      console.log(
+        `  ${idx}. ${task.desc} :: ${
+          task.completeIn ? "Completed".green : "Pending".red
+        } `
+      );
+    });
+  }
+
+  listPendingCompleted(completed = true) {
+    console.log();
+    let index = 1;
+    this.listArr.forEach((task) => {
+      if (completed === !task.completeIn) return;
+      const idx = `${index++}`.green;
+      console.log(
+        `  ${idx}. ${task.desc} :: ${
+          task.completeIn ? task.completeIn.green : "Pending".red
+        } `
+      );
+    });
   }
 }
 
