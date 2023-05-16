@@ -24,7 +24,7 @@ class Tasks {
       delete this._list[id];
     }
   }
-  
+
   loadTaskFromArray(tasks = []) {
     tasks.map((task) => (this._list[task.id] = task));
   }
@@ -57,6 +57,20 @@ class Tasks {
           task.completeIn ? task.completeIn.green : "Pending".red
         } `
       );
+    });
+  }
+
+  toggleCompleted(ids = []) {
+    ids.forEach((id) => {
+      const task = this._list[id];
+      if (!task.completeIn) {
+        task.completeIn = new Date().toISOString();
+      }
+    });
+    this.listArr.forEach(({ id }) => {
+      if (!ids.includes(id)) {
+        this._list[id].completeIn = null;
+      }
     });
   }
 }

@@ -41,7 +41,7 @@ const main = async () => {
         break;
       case "5":
         const ids = await showListChecklist(tasks.listArr);
-        console.log(ids);
+        tasks.toggleCompleted(ids);
         break;
       case "6":
         const id = await listTasksDelete(tasks.listArr);
