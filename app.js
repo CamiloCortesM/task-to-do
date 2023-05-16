@@ -4,6 +4,7 @@ const {
   readInput,
   listTasksDelete,
   confirm,
+  showListChecklist,
 } = require("./helpers/inquirer");
 const { saveDB, readDB } = require("./helpers/saveFile");
 const Tasks = require("./models/tasks");
@@ -37,6 +38,10 @@ const main = async () => {
         break;
       case "4":
         tasks.listPendingCompleted(false);
+        break;
+      case "5":
+        const ids = await showListChecklist(tasks.listArr);
+        console.log(ids);
         break;
       case "6":
         const id = await listTasksDelete(tasks.listArr);
