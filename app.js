@@ -3,6 +3,7 @@ const {
   pause,
   readInput,
   listTasksDelete,
+  confirm,
 } = require("./helpers/inquirer");
 const { saveDB, readDB } = require("./helpers/saveFile");
 const Tasks = require("./models/tasks");
@@ -38,8 +39,16 @@ const main = async () => {
         tasks.listPendingCompleted(false);
         break;
       case "6":
-        const id = await listTasksDelete(task.listArr);
-        tasks.deleteTask(id);
+        const id = await listTasksDelete(tasks.listArr);
+
+        if (id !== "0") {
+          const ok = await confirm("Are you sure?");
+          if (ok) {
+            tasks.deleteTask(id);
+            console.log("Task successfully deleted".green);
+          }
+        }
+
         break;
     }
 
